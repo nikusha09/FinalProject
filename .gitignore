@@ -1,0 +1,21 @@
+# Node modules
+frontend/node_modules/
+backend/node_modules/
+
+# Build output
+frontend/dist/
+backend/dist/
+
+# Logs
+*.log
+
+# IDE settings
+.vscode/
+
+# Env files
+.env
+.env.local
+
+# Cache
+.eslintcache
+coverage/
