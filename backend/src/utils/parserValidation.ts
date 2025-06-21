@@ -21,7 +21,7 @@ export function validateAndParseRecipes(blocks: RawRecipeBlock[]): {
   const recipes: Recipe[] = [];
   const errors: ParsingError[] = [];
 
-  blocks.forEach((block, recipeIndex) => {
+  blocks.forEach((block) => {
     const title = block.titleLine.replace('TITLE:', '').trim();
     const ingredients: Ingredient[] = [];
     const steps: string[] = [];
