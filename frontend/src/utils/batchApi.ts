@@ -13,3 +13,20 @@ export async function fetchBatchByName(batchName: string) {
   if (!response.ok) throw new Error('Failed to fetch batch');
   return response.json();
 }
+
+export async function createBatch(batchName: string, recipes: Recipe[] = []) {
+  const response = await fetch(`${API_BASE_URL}/batches`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ batchName, recipes }),
+  });
+  if (!response.ok) throw new Error('Failed to create batch');
+  return response.json();
+}
+
+export async function deleteBatch(batchName: string) {
+  const response = await fetch(`${API_BASE_URL}/batches/${batchName}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) throw new Error('Failed to delete batch');
+}
