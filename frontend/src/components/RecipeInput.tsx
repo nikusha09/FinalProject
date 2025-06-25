@@ -35,7 +35,7 @@ export default function RecipeInput({ inputText, setInputText, onParse }: Props)
         placeholder="Paste your recipes here..."
         className="textarea"
       />
-      <button onClick={handleParse} disabled={loading}>
+      <button style={{marginLeft: '35%'}} onClick={handleParse} disabled={loading}>
         {loading ? 'Parsing...' : 'Parse'}
       </button>
 
