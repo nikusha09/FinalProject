@@ -15,18 +15,37 @@ export async function fetchBatchByName(batchName: string) {
 }
 
 export async function createBatch(batchName: string, recipes: Recipe[] = []) {
+  const token = localStorage.getItem('token');
+
   const response = await fetch(`${API_BASE_URL}/batches`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`, // send token here
+    },
     body: JSON.stringify({ batchName, recipes }),
   });
-  if (!response.ok) throw new Error('Failed to create batch');
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`Failed to create batch: ${errText}`);
+  }
+
   return response.json();
 }
 
+
 export async function deleteBatch(batchName: string) {
+  const token = localStorage.getItem('token');
+  if (!token) throw new Error('No token found — you must be logged in.');
+
   const response = await fetch(`${API_BASE_URL}/batches/${batchName}`, {
     method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
   });
+
   if (!response.ok) throw new Error('Failed to delete batch');
 }
+
