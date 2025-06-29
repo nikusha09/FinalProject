@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { batches, recipes } from '../db/schema';
+import { batches, recipes, ratings } from '../db/schema';
 import { eq } from 'drizzle-orm';
 import * as dotenv from 'dotenv';
 import postgres from 'postgres';
@@ -58,16 +58,24 @@ export const createBatch = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-// ✅ Fetch all batches (public or auth — up to you)
 export const getBatches = async (_: Request, res: Response) => {
   try {
     const allBatches = await db.select().from(batches);
     const batchList = await Promise.all(
       allBatches.map(async (batch) => {
         const recipesList = await db.select().from(recipes).where(eq(recipes.batchId, batch.id));
+        const batchRatings = await db.select().from(ratings).where(eq(ratings.batchId, batch.id));
+
+        const averageRating = batchRatings.length
+          ? batchRatings.reduce((sum, r) => sum + r.score, 0) / batchRatings.length
+          : null;
+
         return {
-          ...batch,
+          id: batch.id,
+          batchName: batch.batchName,
+          userId: batch.userId,
           recipes: recipesList,
+          rating: averageRating,
         };
       })
     );
@@ -78,6 +86,7 @@ export const getBatches = async (_: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch batches.' });
   }
 };
+
 
 // ✅ Fetch a batch by name (public)
 export const getBatchByName = async (req: Request, res: Response): Promise<void> => {

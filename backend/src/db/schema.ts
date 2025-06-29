@@ -22,3 +22,11 @@ export const recipes = pgTable('recipes', {
     steps: jsonb('steps').notNull(),
     batchId: integer('batch_id').references(() => batches.id).notNull(),
 });
+
+// Ratings table
+export const ratings = pgTable('ratings', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').references(() => users.id),
+  batchId: integer('batch_id').references(() => batches.id),
+  score: integer('score').notNull(),
+});

@@ -8,6 +8,13 @@
       "when": 1751150279531,
       "tag": "0000_slim_genesis",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1751174795829,
+      "tag": "0001_cute_lizard",
+      "breakpoints": true
     }
   ]
 }

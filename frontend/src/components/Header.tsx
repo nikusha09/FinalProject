@@ -17,11 +17,13 @@ export default function Header() {
         {token ? (
           <>
             <Link to="/" className="nav-link">Home</Link>
+            <Link to="/dashboard" className="nav-link">Dashboard</Link>
             <button className="logout-button" onClick={handleLogout}>Logout</button>
           </>
         ) : (
           <>
             <Link to="/" className="nav-link">Home</Link>
+            <Link to="/dashboard" style={{ marginLeft: '1rem', color: 'white' }}>Dashboard</Link>
             <Link to="/login" className="nav-link">Login</Link>
             <Link to="/register" className="nav-link">Register</Link>
           </>

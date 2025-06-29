@@ -49,3 +49,37 @@ export async function deleteBatch(batchName: string) {
   if (!response.ok) throw new Error('Failed to delete batch');
 }
 
+export async function rateBatch(batchId: number, rating: number) {
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(`${API_BASE_URL}/batches/${batchId}/rate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({ rating }),
+  });
+
+  if (!response.ok) throw new Error('Failed to submit rating');
+  return response.json();
+}
+
+export async function submitBatchRating(batchId: number, score: number, token: string) {
+  const response = await fetch(`${API_BASE_URL}/batches/${batchId}/rate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({ score }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('Failed to submit rating:', errorText);
+    throw new Error('Failed to submit rating');
+  }
+
+  return response.json();
+}

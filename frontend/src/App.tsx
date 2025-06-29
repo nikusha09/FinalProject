@@ -8,7 +8,7 @@ import { Recipe, Batch } from './types';
 import Login from './components/Login';
 import Register from './components/Register';
 import Header from './components/Header';
-
+import Dashboard from './components/Dashboard';
 function App() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [batches, setBatches] = useState<Batch[]>([]);
@@ -21,6 +21,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route
         path="/recipe"
         element={

@@ -4,6 +4,7 @@ import batchRoutes from './routes/batchRoutes';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import { registerUser, loginUser } from './controllers/authController';
+import ratingRoutes from './routes/ratingRoutes';
 
 const app = express();
 const router = express.Router();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api', parsingRoutes);
 app.use('/api', batchRoutes);
 app.use('/api', authRoutes);
+app.use('/api', ratingRoutes);
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 
