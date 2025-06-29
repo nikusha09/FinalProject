@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "generate:migration": "drizzle-kit generate",
+    "push:migration": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +19,14 @@
     "@eslint/json": "^0.12.0",
     "@eslint/markdown": "^6.4.0",
     "@types/cors": "^2.8.19",
+    "@types/estree": "^1.0.8",
     "@types/express": "^5.0.2",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.29",
+    "@types/json-schema": "^7.0.15",
+    "@types/methods": "^1.1.4",
+    "@types/node": "^22.15.34",
     "@types/supertest": "^6.0.3",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
@@ -35,6 +42,10 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "dotenv": "^17.0.0",
+    "drizzle-orm": "^0.44.2",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "postgres": "^3.4.7"
   }
 }
